@@ -1,12 +1,9 @@
-// ModalWithPercentChanges.js
 import React from 'react';
 import { Modal, Button, Row, Col } from 'antd';
 import CryptoPercentChangeCard from './CryptoPercentChangeCard';
 import OtherInformationAboutCrypto from './OtherInformationAboutCrypto';
 
-
-// Компонент модального окна с процентными изменениями
-const ModalWithPercentChanges = ({ isOpen, onClose, percentChanges, nameValuteForModalChange, loading, onReload }) => {
+const ModalWithPercentChanges = ({ isOpen, onClose, percentChanges, nameValuteForModalChange, loading, onReload, additionalInfo }) => {
 
     const titleChanges = {
         title_change_1h: "Изменения за 1 час",
@@ -78,8 +75,8 @@ const ModalWithPercentChanges = ({ isOpen, onClose, percentChanges, nameValuteFo
                 </Col>
             </Row>
 
-            <OtherInformationAboutCrypto/>
-            
+            {/* Передаем additionalInfo в OtherInformationAboutCrypto */}
+            <OtherInformationAboutCrypto additionalInfo={additionalInfo} />
         </Modal>
     );
 };

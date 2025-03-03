@@ -1,48 +1,63 @@
 import React, { useState } from 'react';
-import { Card } from 'antd'
+import { Card, Tag } from 'antd';
 
+const OtherInformationAboutCrypto = ({ additionalInfo }) => {
+    const [activeTabKey, setActiveTabKey] = useState('tab1');
 
-const tabList = [
-    {
-        key: 'tab1',
-        tab: 'tab1',
-    },
-    {
-        key: 'tab2',
-        tab: 'tab2',
-    },
-];
-
-const contentList = {
-    tab1 : <p>Content1</p>,
-    tab2 : <p>Content2</p>,
-};
-
-
-const OtherInformationAboutCrypto = ({ }) => {
-    const [activeTabKey1, setActiveTabKey1] = useState('tab1');
-    const onTab1Change = (key) => {
-        setActiveTabKey1(key);
+    // Функция для смены активной вкладки
+    const onTabChange = (key) => {
+        setActiveTabKey(key);
     };
 
+    // Создаем вкладки для отображения
+    const tabList = [
+        {
+            key: 'tab1',
+            tab: 'Основная информация',  // Основная информация
+        },
+        {
+            key: 'tab2',
+            tab: 'Другая...',  // Другая информация
+        },
+    ];
+
+    // Создаем контент для каждой вкладки
+    const contentList = {
+        tab1: (
+            <div>
+                <p><strong>Цена (в USD):</strong> ${additionalInfo.priceToUSD}</p>
+                <p><strong>Капитализация:</strong> ${additionalInfo.marketCap}</p>
+                <p><strong>Объем за 24 часа:</strong> ${additionalInfo.volume24h}</p>
+            </div>
+        ),
+        tab2: (
+            <div>
+                <p>
+                    <strong>Дополнительная информация (tags and more) </strong> <br/>
+                    {additionalInfo.tagsCurrencyCard.map((i, idx) => {
+                        return <Tag key={idx}>{i.name}</Tag>
+                    })}
+                </p>
+                {/* Дополнительная информация, если есть */}
+            </div>
+        ),
+    };
 
 
     return (
         <div>
-            {/* Компонент для отображения другой информации о криптовалюте */}
             <div className="other-information">
-                {/* <h1 className='align-center'>Другая информация (ДОРАБОТАТЬ!!!)</h1> */}
-                <br/>
-                    <Card
-                        style={{
+                <br />
+                <Card
+                    style={{
                         width: '100%',
-                        }}
-                        title="Card title"
-                        tabList={tabList}
-                        activeTabKey={activeTabKey1}
-                        onTabChange={onTab1Change}
-                    >
-                    {contentList[activeTabKey1]}
+                    }}
+                    title={`Дополнительная информация о ${additionalInfo.currencyName}`}
+                    tabList={tabList}
+                    activeTabKey={activeTabKey}
+                    onTabChange={onTabChange}
+                >
+                    {contentList[activeTabKey]}
                 </Card>
             </div>
         </div>

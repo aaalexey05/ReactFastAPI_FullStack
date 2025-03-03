@@ -1,9 +1,7 @@
-// CryptoCurrencyCard.js
 import { Card, Row, Button } from 'antd';
 import ModalForChange from './ModalForChange';
 import './../index.css';
 import React, { useState } from 'react';
-
 
 // Функция для форматирования даты
 function formatDate(dateString) {
@@ -20,13 +18,10 @@ function formatDate(dateString) {
 }
 
 function CryptoCurrencyCard(props) {
-    // Получаем данные о валюте из props
     const { currency } = props;
-    console.log(currency)
+    console.log(currency);
 
-    // Состояние для открытия/закрытия модального окна
     const [isModalOpen, setIsModalOpen] = useState(false);
-    // Состояние для отображения загрузки
     const [loading, setLoading] = useState(false);
 
     // Функция для открытия модального окна
@@ -47,7 +42,7 @@ function CryptoCurrencyCard(props) {
         }, 2000); // Простая имитация загрузки данных
     };
 
-    // Получаем процентные изменения из данных от сервера
+    // Процентные изменения
     const percentChanges = {
         percent_change_1h: currency.quote.USD.percent_change_1h,
         percent_change_24h: currency.quote.USD.percent_change_24h,
@@ -57,18 +52,21 @@ function CryptoCurrencyCard(props) {
         percent_change_90d: currency.quote.USD.percent_change_90d,
     };
 
-    // Получаем имя валюты для модального окна
-    const nameValuteForModalChange = currency.name;
+    const additionalInfo = {
+        currencyName: currency.name,
+        tagsCurrencyCard: currency.tags,
+        priceToUSD: currency.quote.USD.price,
+        marketCap: currency.quote.USD.market_cap,
+        volume24h: currency.quote.USD.volume_24h,
+    };
 
-    // Получаем цену валюты
+    const nameValuteForModalChange = currency.name;
     const price = currency.quote.USD.price.toFixed(2);
-    const PriceUSD = currency.quote.USD
 
     if (!currency) {
         return <div>Загрузка...</div>;
     }
 
-    // Получаем дату последнего обновления и дату добавления
     const formattedDateLastUpdated = formatDate(currency.last_updated);
     const formattedDateAdded = formatDate(currency.date_added);
 
@@ -104,6 +102,7 @@ function CryptoCurrencyCard(props) {
                 nameValuteForModalChange={nameValuteForModalChange}
                 loading={loading}
                 onReload={reloadModal}
+                additionalInfo={additionalInfo} // Передаем additionalInfo в ModalForChange
             />
         </>
     );
