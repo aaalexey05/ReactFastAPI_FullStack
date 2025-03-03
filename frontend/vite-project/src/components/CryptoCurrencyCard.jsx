@@ -62,6 +62,7 @@ function CryptoCurrencyCard(props) {
 
     // Получаем цену валюты
     const price = currency.quote.USD.price.toFixed(2);
+    const PriceUSD = currency.quote.USD
 
     if (!currency) {
         return <div>Загрузка...</div>;
