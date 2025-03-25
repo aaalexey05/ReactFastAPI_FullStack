@@ -76,7 +76,10 @@ const ModalWithPercentChanges = ({ isOpen, onClose, percentChanges, nameValuteFo
             </Row>
 
             {/* Передаем additionalInfo в OtherInformationAboutCrypto */}
-            <OtherInformationAboutCrypto additionalInfo={additionalInfo} />
+            <OtherInformationAboutCrypto 
+                additionalInfo={additionalInfo}
+                percentChange={percentChanges} 
+            />
         </Modal>
     );
 };

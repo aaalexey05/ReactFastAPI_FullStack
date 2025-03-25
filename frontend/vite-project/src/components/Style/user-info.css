@@ -1,0 +1,46 @@
+/* Стили для кнопки "Да" в Popconfirm */
+.ant-popconfirm-button .ant-btn-primary {
+    width: auto !important; /* Убираем ширину 100% */
+    background-color: #4CAF50;
+    border-color: #4CAF50;
+    padding: 12px 20px; /* Устанавливаем внутренние отступы */
+    border-radius: 8px;
+    font-size: 16px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .ant-popconfirm-button .ant-btn-dangerous {
+    width: auto !important; /* Убираем ширину 100% */
+    background-color: #A52A2A; /* Цвет для кнопки "Нет" */
+    border-color: #A52A2A;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 16px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Стиль для основной кнопки */
+  .ant-btn-primary {
+    background-color: #4CAF50;
+    border-color: #4CAF50;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 16px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Стиль для кнопки на hover */
+  .ant-btn-primary:hover {
+    background-color: #45a049;
+    border-color: #45a049;
+  }
+  
+  .ant-btn {
+    margin-top: 10px;
+    transition: background-color 0.3s;
+  }
+  
+  button {
+    transition: background-color 0.3s ease;
+  }
+  
