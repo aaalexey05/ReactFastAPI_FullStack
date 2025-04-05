@@ -1,0 +1,39 @@
+/* Контейнер для списка, выравнивание по центру экрана */
+.container {
+    display: flex;
+    justify-content: center; /* Центрируем по горизонтали */
+    align-items: center; /* Центрируем по вертикали */
+    font-size: 1.5rem;
+    list-style-type: none;
+    gap: 20px;
+    padding: 0; /* Убираем стандартные отступы списка */
+    margin: 0 auto; /* Автоматические отступы по бокам для центрирования */
+    width: 100%; /* Занимает всю доступную ширину */
+}
+
+/* Элементы списка */
+.neon-text {
+    font-size: 2rem;
+    animation-name: fadeLeft;
+    animation-duration: calc(var(--i) * 1s);
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-in-out;
+    /* Дополнительно можно добавить для лучшего выравнивания: */
+    text-align: center; /* Выравнивание текста внутри элемента */
+}
+
+/* Анимация для текста */
+@keyframes fadeLeft {
+    10% {
+        transform: translateX(-200px);
+        opacity: 0;
+    }
+    60% {
+        opacity: 0;
+        transform: translateX(200px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}

@@ -1,0 +1,58 @@
+/* Основные стили для шапки */
+.header {
+    background-color: #FFFFFF; /* Белый фон для шапки */
+    color: #000000; /* Черный цвет текста */
+    padding: 10px 20px; /* Отступы */
+    position: sticky; /* Закрепляем шапку в верхней части */
+    top: 0; /* Прикрепляем к верхнему краю */
+    z-index: 100; /* Устанавливаем высокий z-index, чтобы шапка была сверху */
+    display: flex; /* Используем flexbox для размещения элементов */
+    justify-content: space-between; /* Распределяем элементы по краям */
+    align-items: center; /* Выравнивание по вертикали */
+  }
+  
+  .header-title {
+    margin: 0;
+    font-size: 40px; /* Размер шрифта для заголовка */
+    font-weight: bold; /* Жирный шрифт для заголовка */
+    color: #3F3E3E;
+    text-align: left; /* Заголовок выравнивается по левому краю */
+    flex-grow: 1; /* Заголовок будет занимать доступное пространство */
+  }
+  
+  .nav {
+    display: flex; /* Используем flexbox для навигации */
+    justify-content: flex-end; /* Элементы меню будут расположены справа */
+    align-items: center; /* Выравнивание по вертикали */
+  }
+  
+  .nav-list {
+    display: flex;
+    list-style: none; /* Убираем маркеры списка */
+    padding: 0; /* Убираем внутренние отступы */
+    margin: 0; /* Убираем внешние отступы */
+  }
+  
+  .nav-item {
+    margin-left: 20px; /* Отступ между пунктами меню */
+    font-size: 20px;
+  }
+  
+  .nav-link {
+    color: #000000; /* Черный цвет для ссылок */
+    text-decoration: none; /* Убираем подчеркивание у ссылок */
+    padding: 5px 10px; /* Добавляем отступы для ссылок */
+    border-radius: 4px; /* Скругленные углы */
+    transition: background-color 0.3s; /* Плавное изменение фона при наведении */
+  }
+  
+  .nav-link:hover {
+    background-color: #9ab6d4; /* Фон при наведении */
+  }
+  
+  /* Стили для активной ссылки */
+  .nav-link.active {
+    background-color: #5D7996; /* Фон для активной ссылки */
+    color: #ffffff; /* Черный цвет текста для активной ссылки */
+  }
+  

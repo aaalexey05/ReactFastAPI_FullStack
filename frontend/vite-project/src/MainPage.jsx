@@ -5,7 +5,6 @@ function MainPage() {
     return (
         <div>
             <App />
-            
         </div>
     );
 }

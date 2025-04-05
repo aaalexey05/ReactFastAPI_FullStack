@@ -7,8 +7,6 @@ import ChangePassword from '../Auth/ChangePassword.jsx';
 import Logout from '../Auth/Logout.jsx';
 import { useNavigate } from 'react-router-dom';
 
-import './Style/user-info.css'
-
 const { Meta } = Card;
 
 const UserInfo = ({ setIsLoggedIn }) => {
@@ -39,11 +37,16 @@ const UserInfo = ({ setIsLoggedIn }) => {
         setUserInfo(response.data);  // Устанавливаем информацию о пользователе
       })
       .catch(error => {
-        notification.error({
-          message: 'Ошибка загрузки данных',
-          description: error.response?.data?.detail || 'Произошла ошибка',
-        });
-      });
+        if (error.response?.status === 401) {
+          localStorage.removeItem('access_token');
+          setIsLoggedIn(false);
+          navigate('/login');
+        } else {
+          notification.error({
+            message: 'Ошибка загрузки данных',
+            description: error.response?.data?.detail || 'Произошла ошибка',
+          });
+      }});
   }, [navigate]);
 
   const toggleChangePassword = () => {
@@ -83,27 +86,6 @@ const UserInfo = ({ setIsLoggedIn }) => {
     }
   };
 
-  const handleFontChange = (info) => {
-    if (info.file.status === 'done') {
-      // Обновление фона
-      axios.patch(
-        'http://127.0.0.1:8000/users/update-font',
-        { font_url: info.file.response.url },
-        { headers: { Authorization: `Bearer ${localStorage.getItem('access_token')}` } }
-      ).then(response => {
-        setUserInfo(prev => ({ ...prev, font_url: response.data.font_url }));
-        notification.success({
-          message: 'Фон обновлен',
-        });
-      }).catch(error => {
-        notification.error({
-          message: 'Ошибка обновления фона',
-          description: error.response?.data?.detail || 'Произошла ошибка',
-        });
-      });
-    }
-  };
-
   const handleLogout = () => {
     // Запрос подтверждения перед выходом
     setIsLoggedIn(false);
@@ -115,7 +97,7 @@ const UserInfo = ({ setIsLoggedIn }) => {
   };
 
   return (
-    <div>
+    <div style={{ position: 'absolute', top: '90px', right: '20px', zIndex: 100 }}>
       <Button 
         type="primary" 
         onClick={showModal}
@@ -134,8 +116,7 @@ const UserInfo = ({ setIsLoggedIn }) => {
       >
         {userInfo ? (
           <Card
-            style={{ width: 300 }}
-            cover={<img alt="example" src={userInfo.avatar_url || '/default-avatar.png'} />}
+            style={{ width: 300, 'left': '80px' }}
             actions={[
               <SettingOutlined key="setting" onClick={() => setShowUpdateModal(true)} />,
               <EditOutlined key="edit" />,
@@ -143,7 +124,6 @@ const UserInfo = ({ setIsLoggedIn }) => {
             ]}
           >
             <Meta
-              avatar={<Avatar src={userInfo.avatar_url || '/default-avatar.png'} />}
               title={userInfo.username}
               description={userInfo.email}
             />
@@ -198,7 +178,6 @@ const UserInfo = ({ setIsLoggedIn }) => {
         <Upload
           action="/upload-font"
           listType="picture"
-          onChange={handleFontChange}
           showUploadList={false}
         >
           <Button icon={<EditOutlined />}>Выберите новый фон</Button>

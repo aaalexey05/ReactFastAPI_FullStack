@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Form, Input, Button, notification } from 'antd';
 import axios from 'axios';
-import './background.scss';  // Подключаем стили
 import { useNavigate } from 'react-router-dom';
 
 const Login = ({ setIsLoggedIn }) => {
